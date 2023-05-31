@@ -38,6 +38,7 @@ final class AssetInteractor: AssetInteractorProtocol {
     }
 
     func convertAssetIdV2ToProviderAsset(assetIdV2: String, provider: Provider) -> String? {
+        let assetIdV2 = assetIdV2.lowercased()
         let cachedData = reverseproviderAssetTo[provider]
         guard cachedData == nil else {
             return cachedData?[assetIdV2]
@@ -70,9 +71,9 @@ final class AssetInteractor: AssetInteractorProtocol {
         }
 
         providerAssetList.assets.forEach { providerAsset in
-            let assetId = providerAsset.assetId
-            let blockchain = providerAsset.blockchain
-            let assetProtocol = providerAsset.assetProtocol
+            let assetId = providerAsset.assetId.lowercased()
+            let blockchain = providerAsset.blockchain.lowercased()
+            let assetProtocol = providerAsset.assetProtocol.lowercased()
             guard let convertKey = providerAsset.compoundKey ?? providerAsset.currencyCode else {
                 return
             }
